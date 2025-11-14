@@ -3,3 +3,5 @@
 int calculation(int left, char op, int right);
 
 void decoder(int output[], int key, int opCount);
+
+int kPosition(int argc, char **argv);

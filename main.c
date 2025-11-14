@@ -2,73 +2,30 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include "calcchec.h"
+#include "calcchec.h"
 #include "calcfunc.h"
-
-char normOp(char *strOp){
-	if (strOp == NULL||strOp[0]=='\0'){
-		printf("Ошибка ввода: введён некорректный знак операции");
-		return 'e';
-	}
-	if (strlen(strOp) == 1){
-		char op=strOp[0];
-		if (op == '+' || op == '-' || op == '*' || op == '%') {
-			return op;
-        	}
-		else{
-			printf("Ошибка ввода: введён некорректный знак операции");
-			return 'e';
-		}
-	}
-	else{
-		printf("Ошибка ввода: введён некорректный знак операции");
-		return 'e';
-	}
-}
-
-int isNum(char *num){
-	for (int i = 0; i<strlen(num); i++){
-		if (isdigit(num[i])==0){
-			return 0;
-		}
-	}
-	return 1;
-}
 
 int main(int argc, char **argv)
 {
-	if(argc<5){
-		printf("Ошибка ввода: недостаточно аргументов");
+	if (sizeChec(argc)){							//проверка, что число аргументов не меньше 5
 		return 1;
 	}
-	int kPlace = -1;				//Место флага k в строке ввода
-	for (int i = 0;i<argc;i++){
-		if (strcmp(argv[i],"-k")==0){
-			kPlace=i;
-		}
-	}
-	int beforeK = kPlace - 1;			//кол-во аргументов, введёных до k
-	int key;					//ключ декодировки
-	int opCount = beforeK / 3;			//кол-во операций	
-	if (kPlace == -1){
-		printf("Ошибка ввода: флаг -k не введён");
+	int kPlace = -1;							//Место флага k в строке ввода	
+	kPlace = kPosition(argc, argv);						//Нахождение позиции флага k
+	int beforeK = kPlace - 1;						//кол-во аргументов, введёных до k
+	int key;								//ключ декодировки
+	int opCount = beforeK / 3;						//кол-во операций	
+	if (flagChec(kPlace)){							//проверка на наличие флага -k
 		return 1;
 	}
-	if (kPlace == argc - 1){
-		printf("Ошибка ввода: ключ не введён");
+	if (keyInChec(kPlace, argc)){						//проверка на наличие ключа и его единство
 		return 1;
 	}
-	if (isNum(argv[kPlace+1]) == 0){
-		printf("Ошибка ввода: введён некорректный ключ");
+	if (keyChec(argv[kPlace + 1])){						//проверка на корректность ключа (проверка на то, что это число)
 		return 1;
 	}
 	key = atoi(argv[kPlace+1]);
-	if (kPlace + 2 != argc){
-		printf("Ошибка ввода: введён некорректный ключ");
-		return 1;
-	}
-	if (beforeK % 3!=0){
-		printf("Ошибка ввода: некорретный ввод аргументов");
+	if (opCountChec(beforeK)){						//проверка на верность кол-ва введённых аргументов
 		return 1;
 	}
 	int *output = calloc(opCount,sizeof(int));
@@ -78,24 +35,24 @@ int main(int argc, char **argv)
 	}
 	int outIndex = 0;
 	for (int i = 1; i<kPlace; i+=3){
-		char oper = normOp(argv[i+1]);
+		char oper = normOpChec(argv[i+1]);				//проверка на верность введённой операции
 		if (oper == 'e'){
 			free(output);
 			return 1;
 		}
-		if (isNum(argv[i]) == 0 || isNum(argv[i+2]) == 0){
+		if (isNumChec(argv[i]) == 0 || isNumChec(argv[i+2]) == 0){	//проверка на верность введённых операндов
 			printf("Ошибка ввода: введён некорректный операнд");
 			return 1;
 		}
 		int left = atoi(argv[i]);
 		int right = atoi(argv[i+2]);
-		output[outIndex]=calculation(left, oper, right);
+		output[outIndex]=calculation(left, oper, right);		//выполнение арифметического действия
 		outIndex+=1;
 	}
 	for (int i = 0; i<opCount; i++){
 		printf("Ответ №%d: %d \n", i+1, output[i]);
 	}
-	decoder(output, key, opCount);
+	decoder(output, key, opCount);						//выполнение и вывод декодирования
 	free(output);
 	return 0;
 }

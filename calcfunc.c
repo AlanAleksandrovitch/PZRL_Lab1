@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "calcfunc.h"
 int calculation(int left, char op, int right){
         switch (op){
@@ -29,3 +30,11 @@ void decoder(int output[], int key, int opCount){
         }
 }
 
+int kPosition(int argc, char **argv){
+        for (int i = 0;i<argc;i++){
+                if (strcmp(argv[i],"-k")==0){
+                        return i;
+                }
+        }
+        return -1;
+}
