@@ -11,12 +11,12 @@ int calculation(int left, char op, int right){
                         return left * right;
                 case('%'):
                         if (right == 0){
-                                printf("Ошибка ввода: деление на 0!");
+                                printf("Ошибка ввода: деление на 0 \n");
                                 return 0;
                         }
                         return left % right;
                 default:
-                        printf("Ошибка ввода: введён некоррректный знак операции");
+                        printf("Ошибка ввода: введён некоррректный знак операции \n");
                         return 0;
         }
 }
@@ -28,6 +28,7 @@ void decoder(int output[], int key, int opCount){
                 charOut=(output[i]-key);
                 printf("%c", charOut);
         }
+	printf("\n");
 }
 
 int kPosition(int argc, char **argv){

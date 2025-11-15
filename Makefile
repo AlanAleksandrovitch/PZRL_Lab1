@@ -6,7 +6,7 @@ main.o: main.c
 	gcc $(GCC_FLAGS) -c main.c
 calcfunc.o: calcfunc.c calcfunc.h
 	gcc $(GCC_FLAGS) -c calcfunc.c
-calcchec.o: calcchec.c calcchec.h`
+calcchec.o: calcchec.c calcchec.h
 	gcc $(GCC_FLAGS) -c calcchec.c
 $(TARGET): main.o calcfunc.o calcchec.o
 	gcc main.o calcfunc.o calcchec.o -o $(TARGET)

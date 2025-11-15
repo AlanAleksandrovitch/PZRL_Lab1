@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	}
 	int *output = calloc(opCount,sizeof(int));
 	if (output == NULL){
-		printf("Ошибка системы: не удалось выделить память");
+		printf("Ошибка системы: не удалось выделить память\n");
 		return 2;
 	}
 	int outIndex = 0;
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 			return 1;
 		}
 		if (isNumChec(argv[i]) == 0 || isNumChec(argv[i+2]) == 0){	//проверка на верность введённых операндов
-			printf("Ошибка ввода: введён некорректный операнд");
+			printf("Ошибка ввода: введён некорректный операнд\n");
 			return 1;
 		}
 		int left = atoi(argv[i]);
