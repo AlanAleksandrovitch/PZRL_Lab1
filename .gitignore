@@ -1,0 +1,4 @@
+*.o
+cmdcalc
+cmdcalctest1
+*.out
