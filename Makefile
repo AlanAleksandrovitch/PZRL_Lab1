@@ -13,4 +13,4 @@ $(TARGET): main.o calcfunc.o calcchec.o
 clean:
 	rm $(TARGET) *.o $(TARGET)
 run: $(TARGET)
-	./cmdcalc 6 '*' 12 71 - 2 78 - 2 38 '*' 2 70 + 9 -k 0
+	./cmdcalc 6 '*' 13 71 + 4  41 '*' 2 182 % 100 5 '*' 17 5 '*' 10 32 + 6 93 + 0 117 - 0 132 - 12 100 + 14 106 % 1000 42 - 3 -k 6
