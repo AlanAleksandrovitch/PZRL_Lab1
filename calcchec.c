@@ -22,19 +22,28 @@ char normOpChec(char *strOp){
 	return 'e';
 }
 int isNumChec(char *num){
-        if (num == NULL || num [0] == '\0'){
+	if (num == NULL || num [0] == '\0'){
 		return 0;
 	}
-	for (unsigned int i = 0; i<strlen(num); i++){
-                if (isdigit(num[i])==0){
-                        return 0;
-                }
-        }
-        return 1;
+	unsigned int start = 0;
+	if (num[0] == '-'){
+		start = 1;
+		if (num[1] == '\0'){
+			return 0;
+		}
+	}
+	if (isdigit(num[start]) == 0){
+		return 0;
+	}
+	for (unsigned int i = 1; i<strlen(num); i++){
+		if (isdigit(num[i])==0){
+			return 0;
+		}
+	}
+	return 1;
 }
-
 int sizeChec(int argc){
-	if(argc<5){
+	if(argc<6){
 		printf("Ошибка ввода: недостаточно аргументов \n");
 		return 1;
 	}

@@ -2,3 +2,4 @@
 cmdcalc
 cmdcalctest1
 *.out
+.DS_Store
