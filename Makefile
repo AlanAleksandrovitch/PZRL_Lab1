@@ -11,6 +11,6 @@ calcchec.o: calcchec.c calcchec.h
 $(TARGET): main.o calcfunc.o calcchec.o
 	gcc main.o calcfunc.o calcchec.o -o $(TARGET)
 clean:
-	rm $(TARGET) *.o $(TARGET)
+	rm -f *.o $(TARGET)
 run: $(TARGET)
 	./cmdcalc 6 '*' 13 71 + 4  41 '*' 2 182 % 100 5 '*' 17 5 '*' 10 32 + 6 93 + 0 117 - 0 132 - 12 100 + 14 106 % 1000 42 - 3 -k 6
